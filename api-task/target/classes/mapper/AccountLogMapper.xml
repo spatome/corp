@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hengpeng.api.task.dao.AccountLogMapper" >
+  <resultMap id="BaseResultMap" type="com.hengpeng.api.entity.AccountLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="company_no" property="companyNo" jdbcType="CHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="in_out" property="inOut" jdbcType="VARCHAR" />
+    <result column="in_out_desc" property="inOutDesc" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="itime" property="itime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, version, company_no, order_no, in_out, in_out_desc, amount, itime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from accountlog
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from accountlog
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hengpeng.api.entity.AccountLog" useGeneratedKeys="true" keyProperty="id">
+    insert into accountlog (id, version, company_no, 
+      order_no, in_out, in_out_desc, 
+      amount, itime)
+    values (#{id,jdbcType=BIGINT}, #{version,jdbcType=BIGINT}, #{companyNo,jdbcType=CHAR}, 
+      #{orderNo,jdbcType=VARCHAR}, #{inOut,jdbcType=VARCHAR}, #{inOutDesc,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{itime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hengpeng.api.entity.AccountLog" useGeneratedKeys="true" keyProperty="id">
+    insert into accountlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="companyNo != null" >
+        company_no,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="inOut != null" >
+        in_out,
+      </if>
+      <if test="inOutDesc != null" >
+        in_out_desc,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="itime != null" >
+        itime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="companyNo != null" >
+        #{companyNo,jdbcType=CHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="inOut != null" >
+        #{inOut,jdbcType=VARCHAR},
+      </if>
+      <if test="inOutDesc != null" >
+        #{inOutDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="itime != null" >
+        #{itime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hengpeng.api.entity.AccountLog" >
+    update accountlog
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="companyNo != null" >
+        company_no = #{companyNo,jdbcType=CHAR},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="inOut != null" >
+        in_out = #{inOut,jdbcType=VARCHAR},
+      </if>
+      <if test="inOutDesc != null" >
+        in_out_desc = #{inOutDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="itime != null" >
+        itime = #{itime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hengpeng.api.entity.AccountLog" >
+    update accountlog
+    set version = #{version,jdbcType=BIGINT},
+      company_no = #{companyNo,jdbcType=CHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      in_out = #{inOut,jdbcType=VARCHAR},
+      in_out_desc = #{inOutDesc,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      itime = #{itime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+	<!-- 批量插入生 -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		<selectKey resultType ="java.lang.Long" keyProperty= "id" order= "AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey >
+    	insert into accountlog (id, version, company_no, 
+      		order_no, in_out, in_out_desc, 
+      		amount, itime)
+   		values
+		<foreach collection ="list" item="item" index= "index" separator =",">
+		(
+			#{item.id,jdbcType=BIGINT}, 
+			#{item.version,jdbcType=BIGINT}, 
+			#{item.companyNo,jdbcType=CHAR}, 
+      		#{item.orderNo,jdbcType=VARCHAR}, 
+      		#{item.inOut,jdbcType=VARCHAR}, 
+      		#{item.inOutDesc,jdbcType=VARCHAR}, 
+      		#{item.amount,jdbcType=DECIMAL}, 
+      		#{item.itime,jdbcType=TIMESTAMP}
+		)
+		</foreach>
+	</insert>
+</mapper>

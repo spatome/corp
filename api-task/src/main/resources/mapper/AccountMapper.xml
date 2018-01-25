@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hengpeng.api.task.dao.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.hengpeng.api.entity.Account" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="account_no" property="accountNo" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="current_balance" property="currentBalance" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="check_time" property="checkTime" jdbcType="TIMESTAMP" />
+    <result column="itime" property="itime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, version, account_no, amount, current_balance, status, check_time, itime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hengpeng.api.entity.Account" useGeneratedKeys="true" keyProperty="id">
+    insert into account (id, version, account_no, 
+      amount, current_balance, status, 
+      check_time, itime)
+    values (#{id,jdbcType=BIGINT}, #{version,jdbcType=BIGINT}, #{accountNo,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{currentBalance,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, 
+      #{checkTime,jdbcType=TIMESTAMP}, #{itime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hengpeng.api.entity.Account" useGeneratedKeys="true" keyProperty="id">
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="accountNo != null" >
+        account_no,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="currentBalance != null" >
+        current_balance,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="checkTime != null" >
+        check_time,
+      </if>
+      <if test="itime != null" >
+        itime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="accountNo != null" >
+        #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="currentBalance != null" >
+        #{currentBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null" >
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itime != null" >
+        #{itime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hengpeng.api.entity.Account" >
+    update account
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="accountNo != null" >
+        account_no = #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="currentBalance != null" >
+        current_balance = #{currentBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null" >
+        check_time = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itime != null" >
+        itime = #{itime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hengpeng.api.entity.Account" >
+    update account
+    set version = #{version,jdbcType=BIGINT},
+      account_no = #{accountNo,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      current_balance = #{currentBalance,jdbcType=DECIMAL},
+      status = #{status,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=TIMESTAMP},
+      itime = #{itime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <select id="selectByBean" resultMap="BaseResultMap" parameterType="com.hengpeng.api.entity.Account">
+		select
+		<include refid="Base_Column_List" />
+		from account T WHERE 1 = 1
+      <if test="version != null" >
+        AND version = #{version,jdbcType=BIGINT}
+      </if>
+      <if test="accountNo != null" >
+        AND account_no = #{accountNo,jdbcType=VARCHAR}
+      </if>
+      <if test="amount != null" >
+        AND amount = #{amount,jdbcType=DECIMAL}
+      </if>
+      <if test="currentBalance != null" >
+        AND current_balance = #{currentBalance,jdbcType=DECIMAL}
+      </if>
+      <if test="status != null" >
+        AND status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="checkTime != null" >
+        AND check_time = #{checkTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="itime != null" >
+        AND itime = #{itime,jdbcType=TIMESTAMP}
+      </if>
+	</select>
+
+  <update id="addCurrentBalance">
+    update account T
+    set current_balance = current_balance + #{amount,jdbcType=DECIMAL},
+      	check_time = now()
+    where account_no = #{accountNo,jdbcType=VARCHAR}
+  </update>
+
+  <update id="subtractCurrentBalance">
+    update account T
+    set current_balance = current_balance - #{amount,jdbcType=DECIMAL},
+      	check_time = now()
+    where account_no = #{accountNo,jdbcType=VARCHAR} and current_balance>=#{amount,jdbcType=DECIMAL}
+  </update>
+</mapper>

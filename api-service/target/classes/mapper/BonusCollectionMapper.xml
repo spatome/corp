@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hengpeng.api.dao.BonusCollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.hengpeng.api.entity.BonusCollection" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="company_no" property="companyNo" jdbcType="VARCHAR" />
+    <result column="issue_no" property="issueNo" jdbcType="VARCHAR" />
+    <result column="game_type" property="gameType" jdbcType="VARCHAR" />
+    <result column="bonus_code" property="bonusCode" jdbcType="VARCHAR" />
+    <result column="bonus_count" property="bonusCount" jdbcType="INTEGER" />
+    <result column="bonus_amount" property="bonusAmount" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, company_no, issue_no, game_type, bonus_code, bonus_count, bonus_amount
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bonuscollection
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bonuscollection
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hengpeng.api.entity.BonusCollection" useGeneratedKeys="true" keyProperty="id">
+    insert into bonuscollection (id, company_no, issue_no, 
+      game_type, bonus_code, bonus_count, 
+      bonus_amount)
+    values (#{id,jdbcType=BIGINT}, #{companyNo,jdbcType=VARCHAR}, #{issueNo,jdbcType=VARCHAR}, 
+      #{gameType,jdbcType=VARCHAR}, #{bonusCode,jdbcType=VARCHAR}, #{bonusCount,jdbcType=INTEGER}, 
+      #{bonusAmount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hengpeng.api.entity.BonusCollection" useGeneratedKeys="true" keyProperty="id">
+    insert into bonuscollection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="companyNo != null" >
+        company_no,
+      </if>
+      <if test="issueNo != null" >
+        issue_no,
+      </if>
+      <if test="gameType != null" >
+        game_type,
+      </if>
+      <if test="bonusCode != null" >
+        bonus_code,
+      </if>
+      <if test="bonusCount != null" >
+        bonus_count,
+      </if>
+      <if test="bonusAmount != null" >
+        bonus_amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="companyNo != null" >
+        #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="issueNo != null" >
+        #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="gameType != null" >
+        #{gameType,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusCode != null" >
+        #{bonusCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusCount != null" >
+        #{bonusCount,jdbcType=INTEGER},
+      </if>
+      <if test="bonusAmount != null" >
+        #{bonusAmount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hengpeng.api.entity.BonusCollection" >
+    update bonuscollection
+    <set >
+      <if test="companyNo != null" >
+        company_no = #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="issueNo != null" >
+        issue_no = #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="gameType != null" >
+        game_type = #{gameType,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusCode != null" >
+        bonus_code = #{bonusCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusCount != null" >
+        bonus_count = #{bonusCount,jdbcType=INTEGER},
+      </if>
+      <if test="bonusAmount != null" >
+        bonus_amount = #{bonusAmount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hengpeng.api.entity.BonusCollection" >
+    update bonuscollection
+    set company_no = #{companyNo,jdbcType=VARCHAR},
+      issue_no = #{issueNo,jdbcType=VARCHAR},
+      game_type = #{gameType,jdbcType=VARCHAR},
+      bonus_code = #{bonusCode,jdbcType=VARCHAR},
+      bonus_count = #{bonusCount,jdbcType=INTEGER},
+      bonus_amount = #{bonusAmount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

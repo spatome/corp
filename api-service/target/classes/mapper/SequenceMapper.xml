@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hengpeng.api.dao.SequenceMapper" >
+  <resultMap id="BaseResultMap" type="com.hengpeng.api.entity.Sequence" >
+    <id column="name" property="name" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="cacheCount" property="cachecount" jdbcType="INTEGER" />
+    <result column="indexNum" property="indexnum" jdbcType="BIGINT" />
+    <result column="modMaxNum" property="modmaxnum" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    name, version, cacheCount, indexNum, modMaxNum
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sequence
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sequence
+    where name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hengpeng.api.entity.Sequence" >
+    insert into sequence (name, version, cacheCount, 
+      indexNum, modMaxNum)
+    values (#{name,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, #{cachecount,jdbcType=INTEGER}, 
+      #{indexnum,jdbcType=BIGINT}, #{modmaxnum,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hengpeng.api.entity.Sequence" >
+    insert into sequence
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="cachecount != null" >
+        cacheCount,
+      </if>
+      <if test="indexnum != null" >
+        indexNum,
+      </if>
+      <if test="modmaxnum != null" >
+        modMaxNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="cachecount != null" >
+        #{cachecount,jdbcType=INTEGER},
+      </if>
+      <if test="indexnum != null" >
+        #{indexnum,jdbcType=BIGINT},
+      </if>
+      <if test="modmaxnum != null" >
+        #{modmaxnum,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hengpeng.api.entity.Sequence" >
+    update sequence
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="cachecount != null" >
+        cacheCount = #{cachecount,jdbcType=INTEGER},
+      </if>
+      <if test="indexnum != null" >
+        indexNum = #{indexnum,jdbcType=BIGINT},
+      </if>
+      <if test="modmaxnum != null" >
+        modMaxNum = #{modmaxnum,jdbcType=BIGINT},
+      </if>
+    </set>
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hengpeng.api.entity.Sequence" >
+    update sequence
+    set version = #{version,jdbcType=BIGINT},
+      cacheCount = #{cachecount,jdbcType=INTEGER},
+      indexNum = #{indexnum,jdbcType=BIGINT},
+      modMaxNum = #{modmaxnum,jdbcType=BIGINT}
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+</mapper>

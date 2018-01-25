@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hengpeng.api.task.dao.SsqOrderTempMapper" >
+  <resultMap id="BaseResultMap" type="com.hengpeng.api.entity.SsqOrderTemp" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="company_no" property="companyNo" jdbcType="CHAR" />
+    <result column="ssq_order_no" property="ssqOrderNo" jdbcType="VARCHAR" />
+    <result column="ticket_no" property="ticketNo" jdbcType="VARCHAR" />
+    <result column="issue_no" property="issueNo" jdbcType="VARCHAR" />
+    <result column="play_type" property="playType" jdbcType="VARCHAR" />
+    <result column="times" property="times" jdbcType="INTEGER" />
+    <result column="lotterys" property="lotterys" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="descs" property="descs" jdbcType="VARCHAR" />
+    <result column="itime" property="itime" jdbcType="TIMESTAMP" />
+    <result column="utime" property="utime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, version, company_no, ssq_order_no, ticket_no, issue_no, play_type, times, lotterys, 
+    amount, card_no, real_name, mobile, status, descs, itime, utime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ssqorder_temp
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ssqorder_temp
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hengpeng.api.entity.SsqOrderTemp" useGeneratedKeys="true" keyProperty="id">
+    insert into ssqorder_temp (id, version, company_no, 
+      ssq_order_no, ticket_no, issue_no, 
+      play_type, times, lotterys, 
+      amount, card_no, real_name, 
+      mobile, status, descs, 
+      itime, utime)
+    values (#{id,jdbcType=BIGINT}, #{version,jdbcType=BIGINT}, #{companyNo,jdbcType=CHAR}, 
+      #{ssqOrderNo,jdbcType=VARCHAR}, #{ticketNo,jdbcType=VARCHAR}, #{issueNo,jdbcType=VARCHAR}, 
+      #{playType,jdbcType=VARCHAR}, #{times,jdbcType=INTEGER}, #{lotterys,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{cardNo,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{descs,jdbcType=VARCHAR}, 
+      #{itime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hengpeng.api.entity.SsqOrderTemp" useGeneratedKeys="true" keyProperty="id">
+    insert into ssqorder_temp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="companyNo != null" >
+        company_no,
+      </if>
+      <if test="ssqOrderNo != null" >
+        ssq_order_no,
+      </if>
+      <if test="ticketNo != null" >
+        ticket_no,
+      </if>
+      <if test="issueNo != null" >
+        issue_no,
+      </if>
+      <if test="playType != null" >
+        play_type,
+      </if>
+      <if test="times != null" >
+        times,
+      </if>
+      <if test="lotterys != null" >
+        lotterys,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="cardNo != null" >
+        card_no,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="descs != null" >
+        descs,
+      </if>
+      <if test="itime != null" >
+        itime,
+      </if>
+      <if test="utime != null" >
+        utime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="companyNo != null" >
+        #{companyNo,jdbcType=CHAR},
+      </if>
+      <if test="ssqOrderNo != null" >
+        #{ssqOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketNo != null" >
+        #{ticketNo,jdbcType=VARCHAR},
+      </if>
+      <if test="issueNo != null" >
+        #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null" >
+        #{playType,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null" >
+        #{times,jdbcType=INTEGER},
+      </if>
+      <if test="lotterys != null" >
+        #{lotterys,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null" >
+        #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="itime != null" >
+        #{itime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="utime != null" >
+        #{utime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hengpeng.api.entity.SsqOrderTemp" >
+    update ssqorder_temp
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="companyNo != null" >
+        company_no = #{companyNo,jdbcType=CHAR},
+      </if>
+      <if test="ssqOrderNo != null" >
+        ssq_order_no = #{ssqOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketNo != null" >
+        ticket_no = #{ticketNo,jdbcType=VARCHAR},
+      </if>
+      <if test="issueNo != null" >
+        issue_no = #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null" >
+        play_type = #{playType,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null" >
+        times = #{times,jdbcType=INTEGER},
+      </if>
+      <if test="lotterys != null" >
+        lotterys = #{lotterys,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="cardNo != null" >
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null" >
+        descs = #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="itime != null" >
+        itime = #{itime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="utime != null" >
+        utime = #{utime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hengpeng.api.entity.SsqOrderTemp" >
+    update ssqorder_temp
+    set version = #{version,jdbcType=BIGINT},
+      company_no = #{companyNo,jdbcType=CHAR},
+      ssq_order_no = #{ssqOrderNo,jdbcType=VARCHAR},
+      ticket_no = #{ticketNo,jdbcType=VARCHAR},
+      issue_no = #{issueNo,jdbcType=VARCHAR},
+      play_type = #{playType,jdbcType=VARCHAR},
+      times = #{times,jdbcType=INTEGER},
+      lotterys = #{lotterys,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      descs = #{descs,jdbcType=VARCHAR},
+      itime = #{itime,jdbcType=TIMESTAMP},
+      utime = #{utime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+   	<!-- 自定义 -->
+	<select id="getLock" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from ssqorder_temp
+		where id = #{id,jdbcType=BIGINT} FOR UPDATE
+	</select>
+
+    <select id="selectByBean" resultMap="BaseResultMap" parameterType="com.hengpeng.api.entity.SsqOrderTemp">
+		select
+		<include refid="Base_Column_List" />
+		from ssqorder_temp T WHERE 1 = 1
+      <if test="version != null" >
+        AND version = #{version,jdbcType=BIGINT}
+      </if>
+      <if test="companyNo != null" >
+        AND company_no = #{companyNo,jdbcType=CHAR}
+      </if>
+      <if test="ssqOrderNo != null" >
+        AND ssq_order_no = #{ssqOrderNo,jdbcType=VARCHAR}
+      </if>
+      <if test="ticketNo != null" >
+        AND ticket_no = #{ticketNo,jdbcType=VARCHAR}
+      </if>
+      <if test="issueNo != null" >
+        AND issue_no = #{issueNo,jdbcType=VARCHAR}
+      </if>
+      <if test="playType != null" >
+        AND play_type = #{playType,jdbcType=VARCHAR}
+      </if>
+      <if test="times != null" >
+        AND times = #{times,jdbcType=INTEGER}
+      </if>
+      <if test="lotterys != null" >
+        AND lotterys = #{lotterys,jdbcType=VARCHAR}
+      </if>
+      <if test="amount != null" >
+        AND amount = #{amount,jdbcType=DECIMAL}
+      </if>
+      <if test="cardNo != null" >
+        AND card_no = #{cardNo,jdbcType=VARCHAR}
+      </if>
+      <if test="realName != null" >
+        AND real_name = #{realName,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile != null" >
+        AND mobile = #{mobile,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null" >
+        AND status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="descs != null" >
+        AND descs = #{descs,jdbcType=VARCHAR}
+      </if>
+      <if test="itime != null" >
+        AND itime = #{itime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="utime != null" >
+        AND utime = #{utime,jdbcType=TIMESTAMP}
+      </if>
+	</select>
+
+	<!-- 批量插入生 -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		<selectKey resultType ="java.lang.Long" keyProperty= "id" order= "AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey >
+	    insert into ssqorder_temp (id, company_no, 
+      		ssq_order_no, ticket_no, issue_no, 
+      		play_type, times, lotterys, 
+      		amount, card_no, real_name, 
+      		mobile, status, descs,
+      		itime, utime)
+   		values
+		<foreach collection ="list" item="item" index= "index" separator =",">
+		(
+		 	#{item.id,jdbcType=BIGINT}, 
+		 	#{item.companyNo,jdbcType=CHAR}, 
+      		#{item.ssqOrderNo,jdbcType=VARCHAR}, 
+      		#{item.ticketNo,jdbcType=VARCHAR}, 
+      		#{item.issueNo,jdbcType=VARCHAR}, 
+	      	#{item.playType,jdbcType=VARCHAR}, 
+	      	#{item.times,jdbcType=INTEGER}, 
+	      	#{item.lotterys,jdbcType=VARCHAR}, 
+      		#{item.amount,jdbcType=DECIMAL}, 
+      		#{item.cardNo,jdbcType=VARCHAR}, 
+      		#{item.realName,jdbcType=VARCHAR}, 
+      		#{item.mobile,jdbcType=VARCHAR}, 
+      		#{item.status,jdbcType=VARCHAR}, 
+      		#{item.descs,jdbcType=VARCHAR}, 
+      		#{item.itime,jdbcType=TIMESTAMP}, 
+      		#{item.utime,jdbcType=TIMESTAMP}
+		)
+		</foreach>
+	</insert>
+
+	<update id="batchUpdateStatusByOrderNo" parameterType="java.util.List">  
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">  
+               update ssqorder_temp
+               <set>
+               		<if test="item.status != null" >
+                 		status = #{item.status,jdbcType=VARCHAR},
+                 	</if>
+                 	<if test="item.descs != null" >
+                 		descs = #{item.descs,jdbcType=VARCHAR},
+                 	</if>
+                 	<if test="item.utime != null" >
+                 		utime = #{item.utime,jdbcType=TIMESTAMP},
+                 	</if>
+                 	ssq_order_no = #{item.ssqOrderNo,jdbcType=VARCHAR}
+               </set>
+               where ssq_order_no = #{item.ssqOrderNo,jdbcType=VARCHAR}
+        </foreach>
+	</update>
+
+  <update id="updateByOrderNoSelective" parameterType="com.hengpeng.api.entity.SsqOrderTemp" >
+    update ssqorder_temp
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="companyNo != null" >
+        company_no = #{companyNo,jdbcType=CHAR},
+      </if>
+      <if test="ssqOrderNo != null" >
+        ssq_order_no = #{ssqOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketNo != null" >
+        ticket_no = #{ticketNo,jdbcType=VARCHAR},
+      </if>
+      <if test="issueNo != null" >
+        issue_no = #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null" >
+        play_type = #{playType,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null" >
+        times = #{times,jdbcType=INTEGER},
+      </if>
+      <if test="lotterys != null" >
+        lotterys = #{lotterys,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="cardNo != null" >
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null" >
+        descs = #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="itime != null" >
+        itime = #{itime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="utime != null" >
+        utime = #{utime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ssq_order_no = #{ssqOrderNo,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="deleteByOrderNo" parameterType="java.lang.String" >
+    delete from ssqorder_temp
+    where ssq_order_no = #{ssqOrderNo,jdbcType=VARCHAR}
+  </delete>
+  
+	<update id="batchUpdateSendingStatus" parameterType="java.util.List">    
+        update ssqorder_temp
+        set status='SENDING'
+        where id in
+   		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">    
+        	#{item}
+    	</foreach>
+	</update>
+
+</mapper>

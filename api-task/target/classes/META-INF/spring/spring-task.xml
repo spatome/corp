@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-autowire="byName"
+	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans.xsd 
+            http://www.springframework.org/schema/tx 
+            http://www.springframework.org/schema/tx/spring-tx.xsd 
+            http://www.springframework.org/schema/aop 
+            http://www.springframework.org/schema/aop/spring-aop.xsd 
+            http://www.springframework.org/schema/context 
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<bean id="issueServiceImpl" class="com.hengpeng.api.task.service.impl.IssueServiceImpl"/>
+	<bean id="lotteryServiceImpl" class="com.hengpeng.api.task.service.impl.LotteryServiceImpl"/>
+	<bean id="bonusServiceImpl" class="com.hengpeng.api.task.service.impl.BonusServiceImpl"/>
+
+	<!-- 投注 -->
+	<bean id="buyTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="lotteryServiceImpl" />
+		<property name="targetMethod" value="synTicket" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="buyTaskTriger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="buyTask" />
+		<property name="cronExpression" value="0/5 * * * * ?" />
+	</bean>
+
+	<!-- 同步票状态 -->
+	<bean id="buyResultTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="lotteryServiceImpl" />
+		<property name="targetMethod" value="synTicketStatus" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="buyResultTaskTriger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="buyResultTask" />
+		<property name="cronExpression" value="0/2 * * * * ?" />
+	</bean>
+	
+	<!-- 新奖期 -->
+	<bean id="newIssueTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="issueServiceImpl" />
+		<property name="targetMethod" value="synNewPringIssue" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="newIssueTaskTriger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="newIssueTask" />
+		<property name="cronExpression" value="0/5 * * * * ?" />
+	</bean>
+	
+	<!-- 没结束的奖期 -->
+	<bean id="notEndIssueTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="issueServiceImpl" />
+		<property name="targetMethod" value="synBonusPrintIssue" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="notEndIssueTaskTriger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="notEndIssueTask" />
+		<property name="cronExpression" value="0/6 * * * * ?" />
+	</bean>
+	
+	<!-- 兑奖 -->
+	<bean id="bonusTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="bonusServiceImpl" />
+		<property name="targetMethod" value="synBonus" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="bonusTaskTriger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="bonusTask" />
+		<property name="cronExpression" value="0 0/1 * * * ?" />
+	</bean>
+
+	<!-- 定时任务开关 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+<!-- 				<ref bean="newIssueTaskTriger" />
+				<ref bean="notEndIssueTaskTriger" />
+				<ref bean="buyTaskTriger" />
+				<ref bean="buyResultTaskTriger" />
+				<ref bean="bonusTaskTriger" /> -->
+			</list>
+		</property>
+	</bean>
+
+</beans>

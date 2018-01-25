@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans          
+    http://www.springframework.org/schema/beans/spring-beans.xsd          
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="api-web" />
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
+
+	<!-- 接口引用 -->
+	<dubbo:reference id="demoService" interface="com.hengpeng.api.service.DemoService" version="1.0.0" check="true" lazy="true" timeout="30000" />
+	<dubbo:reference id="userService" interface="com.hengpeng.api.service.UserService" version="1.0.0" check="false" lazy="true" timeout="30000" />
+	<dubbo:reference id="sSQService" interface="com.hengpeng.api.service.SSQService" version="1.0.0" check="false" lazy="true" timeout="30000" />
+	<dubbo:reference id="bonusService" interface="com.hengpeng.api.service.BonusService" version="1.0.0" check="false" lazy="true" timeout="30000" />
+
+</beans>

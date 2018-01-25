@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hengpeng.api.dao.SsqBonusMapper" >
+  <resultMap id="BaseResultMap" type="com.hengpeng.api.entity.SsqBonus" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="issue_no" property="issueNo" jdbcType="VARCHAR" />
+    <result column="company_no" property="companyNo" jdbcType="CHAR" />
+    <result column="ssq_order_no" property="ssqOrderNo" jdbcType="VARCHAR" />
+    <result column="play_type" property="playType" jdbcType="VARCHAR" />
+    <result column="bonus_count" property="bonusCount" jdbcType="INTEGER" />
+    <result column="bonus_amount" property="bonusAmount" jdbcType="DECIMAL" />
+    <result column="bonus_code" property="bonusCode" jdbcType="VARCHAR" />
+    <result column="bonus_level" property="bonusLevel" jdbcType="VARCHAR" />
+    <result column="bonus_level_amount" property="bonusLevelAmount" jdbcType="DECIMAL" />
+    <result column="is_bom_bonus" property="isBomBonus" jdbcType="VARCHAR" />
+    <result column="itime" property="itime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, version, issue_no, company_no, ssq_order_no, play_type, bonus_count, bonus_amount, 
+    bonus_code, bonus_level, bonus_level_amount, is_bom_bonus, itime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ssqbonus
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ssqbonus
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hengpeng.api.entity.SsqBonus" useGeneratedKeys="true" keyProperty="id">
+    insert into ssqbonus (id, version, issue_no, 
+      company_no, ssq_order_no, play_type, 
+      bonus_count, bonus_amount, bonus_code, 
+      bonus_level, bonus_level_amount, is_bom_bonus, 
+      itime)
+    values (#{id,jdbcType=BIGINT}, #{version,jdbcType=BIGINT}, #{issueNo,jdbcType=VARCHAR}, 
+      #{companyNo,jdbcType=CHAR}, #{ssqOrderNo,jdbcType=VARCHAR}, #{playType,jdbcType=VARCHAR}, 
+      #{bonusCount,jdbcType=INTEGER}, #{bonusAmount,jdbcType=DECIMAL}, #{bonusCode,jdbcType=VARCHAR}, 
+      #{bonusLevel,jdbcType=VARCHAR}, #{bonusLevelAmount,jdbcType=DECIMAL}, #{isBomBonus,jdbcType=VARCHAR}, 
+      #{itime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hengpeng.api.entity.SsqBonus" useGeneratedKeys="true" keyProperty="id">
+    insert into ssqbonus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="issueNo != null" >
+        issue_no,
+      </if>
+      <if test="companyNo != null" >
+        company_no,
+      </if>
+      <if test="ssqOrderNo != null" >
+        ssq_order_no,
+      </if>
+      <if test="playType != null" >
+        play_type,
+      </if>
+      <if test="bonusCount != null" >
+        bonus_count,
+      </if>
+      <if test="bonusAmount != null" >
+        bonus_amount,
+      </if>
+      <if test="bonusCode != null" >
+        bonus_code,
+      </if>
+      <if test="bonusLevel != null" >
+        bonus_level,
+      </if>
+      <if test="bonusLevelAmount != null" >
+        bonus_level_amount,
+      </if>
+      <if test="isBomBonus != null" >
+        is_bom_bonus,
+      </if>
+      <if test="itime != null" >
+        itime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="issueNo != null" >
+        #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNo != null" >
+        #{companyNo,jdbcType=CHAR},
+      </if>
+      <if test="ssqOrderNo != null" >
+        #{ssqOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null" >
+        #{playType,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusCount != null" >
+        #{bonusCount,jdbcType=INTEGER},
+      </if>
+      <if test="bonusAmount != null" >
+        #{bonusAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="bonusCode != null" >
+        #{bonusCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusLevel != null" >
+        #{bonusLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusLevelAmount != null" >
+        #{bonusLevelAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="isBomBonus != null" >
+        #{isBomBonus,jdbcType=VARCHAR},
+      </if>
+      <if test="itime != null" >
+        #{itime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hengpeng.api.entity.SsqBonus" >
+    update ssqbonus
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="issueNo != null" >
+        issue_no = #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNo != null" >
+        company_no = #{companyNo,jdbcType=CHAR},
+      </if>
+      <if test="ssqOrderNo != null" >
+        ssq_order_no = #{ssqOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null" >
+        play_type = #{playType,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusCount != null" >
+        bonus_count = #{bonusCount,jdbcType=INTEGER},
+      </if>
+      <if test="bonusAmount != null" >
+        bonus_amount = #{bonusAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="bonusCode != null" >
+        bonus_code = #{bonusCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusLevel != null" >
+        bonus_level = #{bonusLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusLevelAmount != null" >
+        bonus_level_amount = #{bonusLevelAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="isBomBonus != null" >
+        is_bom_bonus = #{isBomBonus,jdbcType=VARCHAR},
+      </if>
+      <if test="itime != null" >
+        itime = #{itime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hengpeng.api.entity.SsqBonus" >
+    update ssqbonus
+    set version = #{version,jdbcType=BIGINT},
+      issue_no = #{issueNo,jdbcType=VARCHAR},
+      company_no = #{companyNo,jdbcType=CHAR},
+      ssq_order_no = #{ssqOrderNo,jdbcType=VARCHAR},
+      play_type = #{playType,jdbcType=VARCHAR},
+      bonus_count = #{bonusCount,jdbcType=INTEGER},
+      bonus_amount = #{bonusAmount,jdbcType=DECIMAL},
+      bonus_code = #{bonusCode,jdbcType=VARCHAR},
+      bonus_level = #{bonusLevel,jdbcType=VARCHAR},
+      bonus_level_amount = #{bonusLevelAmount,jdbcType=DECIMAL},
+      is_bom_bonus = #{isBomBonus,jdbcType=VARCHAR},
+      itime = #{itime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+   	<!-- 自定义 -->
+	<select id="getLock" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from ssqbonus
+		where id = #{id,jdbcType=BIGINT} FOR UPDATE
+	</select>
+
+    <select id="selectByBean" resultMap="BaseResultMap" parameterType="com.hengpeng.api.entity.SsqBonus">
+		select
+		<include refid="Base_Column_List" />
+		from ssqbonus T WHERE 1 = 1
+      <if test="version != null" >
+        AND version = #{version,jdbcType=BIGINT}
+      </if>
+      <if test="issueNo != null" >
+        AND issue_no = #{issueNo,jdbcType=VARCHAR}
+      </if>
+      <if test="companyNo != null" >
+        AND company_no = #{companyNo,jdbcType=CHAR}
+      </if>
+      <if test="ssqOrderNo != null" >
+        AND ssq_order_no = #{ssqOrderNo,jdbcType=VARCHAR}
+      </if>
+      <if test="playType != null" >
+        AND play_type = #{playType,jdbcType=VARCHAR}
+      </if>
+      <if test="bonusCount != null" >
+        AND bonus_count = #{bonusCount,jdbcType=INTEGER}
+      </if>
+      <if test="bonusAmount != null" >
+        AND bonus_amount = #{bonusAmount,jdbcType=DECIMAL}
+      </if>
+      <if test="bonusCode != null" >
+        AND bonus_code = #{bonusCode,jdbcType=VARCHAR}
+      </if>
+      <if test="bonusLevel != null" >
+        AND bonus_level = #{bonusLevel,jdbcType=VARCHAR}
+      </if>
+      <if test="bonusLevelAmount != null" >
+        AND bonus_level_amount = #{bonusLevelAmount,jdbcType=DECIMAL}
+      </if>
+      <if test="isBomBonus != null" >
+        AND is_bom_bonus = #{isBomBonus,jdbcType=VARCHAR}
+      </if>
+      <if test="itime != null" >
+        AND itime = #{itime,jdbcType=TIMESTAMP}
+      </if>
+	</select>  
+
+	<select id="selectBonus" resultMap="BaseResultMap" parameterType="com.hengpeng.api.entity.SsqBonus">
+		select
+			T.company_no,T.bonus_code,SUM(T.bonus_amount) as bonus_amount,SUM(T.bonus_count) as bonus_count
+		from ssqbonus T WHERE 1 = 1
+			AND issue_no = #{issueNo,jdbcType=VARCHAR}
+			AND company_no = #{companyNo,jdbcType=CHAR}
+	</select>
+</mapper>

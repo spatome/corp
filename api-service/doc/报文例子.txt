@@ -1,0 +1,19 @@
+投注:
+{"enterpriseNo":"000001","list":[{"ticketNo":"11201701010000000000000000000001","orderNo":null,"cardNo":"210002199001010700","realName":"本拉登","mobile":"13000000000","mail":"heng@126.com","issueNo":"2017001","gameType":"SSQ","playType":"101","times":"1","lotterys":"01,02,03,04,05,06#01","amount":"2.00"},{"ticketNo":"11201701010000000000000000000002","orderNo":null,"cardNo":"210002199001010700","realName":"本拉登","mobile":"13000000000","mail":"heng@126.com","issueNo":"2017001","gameType":"SSQ","playType":"101","times":"1","lotterys":"01,02,03,04,05,06#01,02","amount":"4.00"},{"ticketNo":"11201701010000000000000000000003","orderNo":null,"cardNo":"210002199001010700","realName":"本拉登","mobile":"13000000000","mail":"heng@126.com","issueNo":"2017001","gameType":"SSQ","playType":"101","times":"2","lotterys":"01,02,03,04,05,06#01","amount":"4.00"}]}
+{"failCount":"2","fialTicketNos":"{11201701010000000000000000000001#金额不符}{11201701010000000000000000000003#金额金额不符}","list":[{"ticketNo":"11201701010000000000000000000001","orderNo":""},{"ticketNo":"11201701010000000000000000000003","orderNo":""}]}
+
+查询投注结果:
+{"enterpriseNo":"000001","orderNos":"11368921201701010000000001","isMore":"NO"}
+{"list":[{"ticketNo":"11201701010000000000000000000001","orderNo":"11368921201701010000000001","gameType":null,"issueNo":null,"playType":null,"amount":null,"times":null,"status":"UNDEAL","statusDescs":"未处理","dealTime":"2017-01-01 08:30:00","cardNo":null,"realName":null,"mobile":null,"lotterys":null}]}
+
+查询奖期:
+{"gameType":"SSQ","issueNo":"2017001"}
+{"issueNo":"2017001","gameType":"SSQ","startTime":"2017-01-01 08:00:00","stopTime":"2017-01-02 08:00:00","officialStartTime":"2017-01-01 08:30:00","officialStopTime":"2017-01-02 08:30:00","bonusCode":"01,02,03,04,05,06#01","issueType":"BONUS"}
+
+查询中奖信息:
+{"gameType":"SSQ","issueNo":"2017001","enterpriseNo":"000001"}
+{"bonusCode":"01,02,03,04,05,06#01","bonusCount":"2","bonusAmount":"100"}
+
+查询中奖详情:
+{"gameType":"SSQ","issueNo":"20170101","enterpriseNo":"000001","pageNum":"1","pageSize":"1000"}
+{"bonusCode":"01,02,03,04,05,06#01","list":[{"orderNo":"","playType":"101","isBombBonus":"NO","bonusLevel":"6","bonusLevelAmount":"5.00","amount":"10.00"}]}
